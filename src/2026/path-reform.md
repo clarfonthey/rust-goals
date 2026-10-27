@@ -14,7 +14,7 @@ Overhaul the standard library `Path` APIs, both creating a "v2" version of the e
 
 ### The status quo
 
-Even though the standard library `Path` and `PathBuf` types are ubiquitously used throughout the ecosystem, their current design has a number of shortcomings that make them inadquate for a large number of use cases. Issues range from clunky APIs to catastrophic performance regressions and it's clear that a lot of work needs to be done to improve these APIs for the larger ecosystem.
+Even though the standard library `Path` and `PathBuf` types are ubiquitously used throughout the ecosystem, their current design has a number of shortcomings that make them inadequate for a large number of use cases. Issues range from clunky APIs to catastrophic performance regressions, and it's clear that a lot of work needs to be done to improve these APIs for the larger ecosystem.
 
 One of the most relevant issues is the fact that the difference in handling between Windows and Unix paths means that, although the logic is entirely encapsulated in platform-independent Rust code, the current implementation only allows using the Windows logic on Windows targets and the Unix logic on Unix targets, meaning that tests have to be built and run for separate targets even though the code compiles just fine on both targets. Having to cross-compile just to run different parsing logic isn't great.
 
