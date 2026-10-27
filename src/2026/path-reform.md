@@ -8,7 +8,7 @@
 
 ## Summary
 
-Overhaul the standard library `Path` APIs, both creating a "v2" version of the existing APIs and offering explicit platform-independent POSIX/Windows path types.
+Overhaul the standard library `Path` APIs, both creating a "v2" version of the existing APIs and adding explicit platform-independent POSIX/Windows path types.
 
 ## Motivation
 
@@ -26,7 +26,7 @@ While there are a few ecosystem crates that attempt to fix these issues, the com
 
 The most substantial, immediate work has been suggested for a very long time and actually has already been implemented by Python: we need to separate out the Windows and POSIX path types into two types that can be used and tested on all platforms. (Python calls these `WindowsPath` and `PosixPath`, although the Rust story is a bit more complicated.)
 
-Note that these types actually should not have the same API because they will be able to explicitly take the quirks of their underlying implementations into account. For example, a large portion of the handling of the `Path::components` iterator depends on the prefix of Windows paths, and it would be nice to remove prefix handling entirely from the components iterator to remove that complex branch entirely. There could also be separate types for Windows' verbatim paths for users who explicitly want to use verbatim paths for their hygeine guarantees.
+Note that these types actually should not have the same API because they will be able to explicitly take the quirks of their underlying implementations into account. For example, a large portion of the handling of the `Path::components` iterator depends on the prefix of Windows paths, and it would be nice to remove prefix handling entirely from the components iterator to remove that complex branch entirely. There could also be separate types for Windows' verbatim paths for users who explicitly want to use verbatim paths for their hygiene guarantees.
 
 Another reasonable option is to support Unicode-only paths on both platforms, which would be useful for users who want to then convert their paths into strings and would consider non-Unicode data to simply be an error. Ecosystem crates like `camino` exist for this purpose, but this would be a standard library alternative.
 
